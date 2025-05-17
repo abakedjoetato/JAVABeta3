@@ -140,92 +140,45 @@ public class EmbedUtils {
     }
     
     /**
-     * Dynamic title generator for killfeed embeds
+     * Dynamic title generator for killfeed embeds - Using DynamicTitles class
      */
     private static String getRandomKillfeedTitle() {
-        List<String> titles = Arrays.asList(
-            "Elimination Confirmed",
-            "No Survivors",
-            "Precision Eliminated",
-            "Target Neutralized",
-            "Combat Report",
-            "Deadside Elimination",
-            "Hostile Encounter",
-            "Lethal Engagement"
-        );
-        return titles.get(random.nextInt(titles.size()));
+        return DynamicTitles.getKillfeedTitle();
     }
     
     /**
-     * Dynamic title generator for bounty kill embeds
+     * Dynamic title generator for bounty kill embeds - Using DynamicTitles class
      */
     private static String getRandomBountyTitle() {
-        List<String> titles = Arrays.asList(
-            "Contract Fulfilled",
-            "Marked for Death",
-            "Bounty Claimed",
-            "Target Eliminated",
-            "Blood Money Collected",
-            "Hunter's Prize"
-        );
-        return titles.get(random.nextInt(titles.size()));
+        return DynamicTitles.getBountyTitle();
     }
     
     /**
-     * Dynamic title generator for suicide embeds
+     * Dynamic title generator for suicide embeds - Using DynamicTitles class
      */
     private static String getRandomSuicideTitle() {
-        List<String> titles = Arrays.asList(
-            "Self-Termination Logged",
-            "Silent Exit",
-            "Final Decision",
-            "Personal Ending",
-            "Self-Inflicted End"
-        );
-        return titles.get(random.nextInt(titles.size()));
+        return DynamicTitles.getSuicideTitle();
     }
     
     /**
-     * Dynamic title generator for falling death embeds
+     * Dynamic title generator for falling death embeds - Using DynamicTitles class
      */
     private static String getRandomFallingTitle() {
-        List<String> titles = Arrays.asList(
-            "Terminal Velocity",
-            "Gravity Claimed Another",
-            "Fatal Descent",
-            "The Ground Won",
-            "Deadly Fall"
-        );
-        return titles.get(random.nextInt(titles.size()));
+        return DynamicTitles.getFallingTitle();
     }
     
     /**
-     * Dynamic title generator for leaderboard embeds
+     * Dynamic title generator for leaderboard embeds - Using DynamicTitles class
      */
     private static String getRandomLeaderboardTitle() {
-        List<String> titles = Arrays.asList(
-            "Apex Predators",
-            "Top Hunters of the Week",
-            "Factions at War",
-            "Deadside's Deadliest",
-            "Survival Rankings",
-            "Kill Hierarchy"
-        );
-        return titles.get(random.nextInt(titles.size()));
+        return DynamicTitles.getLeaderboardTitle();
     }
     
     /**
-     * Dynamic description generator for killfeed embeds
+     * Dynamic description generator for killfeed embeds - Using DynamicTitles class
      */
     private static String getRandomKillfeedDescription(String killer, String victim, String weapon, int distance) {
-        List<String> descriptions = Arrays.asList(
-            killer + " removed " + victim + " at " + distance + "m with " + weapon,
-            killer + " eliminated " + victim + " from " + distance + "m using " + weapon,
-            killer + " neutralized " + victim + " with " + weapon + " (" + distance + "m)",
-            "Clean shot by " + killer + ". " + victim + " never saw it coming.",
-            victim + " fell to " + killer + "'s " + weapon + " at " + distance + " meters"
-        );
-        return descriptions.get(random.nextInt(descriptions.size()));
+        return DynamicTitles.getKillfeedDescription(killer, victim, weapon, distance);
     }
     
     /**
@@ -429,10 +382,11 @@ public class EmbedUtils {
      */
     public static EmbedBuilder leaderboardEmbed() {
         String title = getRandomLeaderboardTitle();
+        String description = DynamicTitles.getLeaderboardDescription();
         
         return new EmbedBuilder()
                 .setTitle(title)
-                .setDescription("Survivors ranked by raw efficiency:")
+                .setDescription(description)
                 .setColor(EMERALD_GREEN)
                 .setThumbnail(WEAPON_STATS_ICON)
                 .setFooter(STANDARD_FOOTER)

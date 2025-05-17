@@ -81,7 +81,7 @@ public class EmbedThemes {
                 .setColor(DEATH_COLOR)
                 .setTitle("Death Feed")
                 .setDescription(String.format("**%s** died from **%s**", victim, cause))
-                .setThumbnail("attachment://Helicrash.png")
+                .setThumbnail(ResourceManager.getAttachmentString(ResourceManager.HELICRASH_ICON))
                 .build();
     }
     
@@ -93,7 +93,7 @@ public class EmbedThemes {
                 .setColor(JOIN_COLOR)
                 .setTitle("Player Joined")
                 .setDescription(String.format("**%s** joined the server", playerName))
-                .setThumbnail("attachment://Connections.png")
+                .setThumbnail(ResourceManager.getAttachmentString(ResourceManager.CONNECTIONS_ICON))
                 .build();
     }
     
@@ -105,7 +105,7 @@ public class EmbedThemes {
                 .setColor(LEAVE_COLOR)
                 .setTitle("Player Left")
                 .setDescription(String.format("**%s** left the server", playerName))
-                .setThumbnail("attachment://Connections.png")
+                .setThumbnail(ResourceManager.getAttachmentString(ResourceManager.CONNECTIONS_ICON))
                 .build();
     }
     
