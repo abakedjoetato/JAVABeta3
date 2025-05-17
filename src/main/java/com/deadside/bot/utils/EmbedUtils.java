@@ -233,22 +233,12 @@ public class EmbedUtils {
     }
     
     /**
-     * Create a modern styled falling death embed
+     * Create a modern styled falling death embed - PHASE 5 differentiation
+     * Consider using AdvancedEmbeds.advancedFallingDeathEmbed for more premium visuals
      */
     public static MessageEmbed fallingDeathEmbed(String player, int height) {
-        String title = getRandomFallingTitle();
-        
-        return new EmbedBuilder()
-                .setTitle(title)
-                .setDescription(player + " fell from a great height")
-                .setColor(DARK_GRAY)
-                .setThumbnail(HELICRASH_ICON) // Added thumbnail for visual consistency
-                .addField("Player", player, true)
-                .addField("Cause", "Falling damage", true)
-                .addField("Height", height + "m", true)
-                .setFooter(STANDARD_FOOTER)
-                .setTimestamp(Instant.now())
-                .build();
+        // Use the AdvancedEmbeds implementation for premium visuals
+        return AdvancedEmbeds.advancedFallingDeathEmbed(player, height);
     }
     
     /**
@@ -336,7 +326,8 @@ public class EmbedUtils {
     }
     
     /**
-     * Create a modern styled leaderboard embed
+     * Create a modern styled leaderboard embed - PHASE 6 enhancement
+     * This returns an EmbedBuilder for further customization
      */
     public static EmbedBuilder leaderboardEmbed() {
         String title = getRandomLeaderboardTitle();
@@ -349,6 +340,17 @@ public class EmbedUtils {
                 .setThumbnail(WEAPON_STATS_ICON)
                 .setFooter(STANDARD_FOOTER)
                 .setTimestamp(Instant.now());
+    }
+    
+    /**
+     * Create a ready-to-use advanced leaderboard with premium styling
+     * @param playerData List of player data to include in the leaderboard
+     * @param page Current page number (0-based)
+     * @param totalPages Total number of pages
+     * @return A fully built MessageEmbed for the leaderboard
+     */
+    public static MessageEmbed advancedLeaderboardEmbed(List<AdvancedEmbeds.PlayerData> playerData, int page, int totalPages) {
+        return AdvancedEmbeds.advancedLeaderboardEmbed(null, null, playerData, page, totalPages);
     }
     
     /**

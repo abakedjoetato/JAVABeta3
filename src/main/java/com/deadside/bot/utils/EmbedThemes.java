@@ -158,42 +158,80 @@ public class EmbedThemes {
     }
     
     /**
-     * Create a faction embed
+     * Create a faction embed with Phase 3 structure enhancements
      */
     public static EmbedBuilder factionEmbed() {
         return baseEmbed()
-                .setColor(SECONDARY_COLOR);
+                .setColor(AccessibilityUtils.getAccessibleColor(SECONDARY_COLOR))
+                .setThumbnail(ResourceManager.getAttachmentString(ResourceManager.FACTION_ICON));
     }
     
     /**
-     * Create a stats embed
+     * Create a stats embed with Phase 3 structure enhancements
      */
     public static EmbedBuilder statsEmbed() {
         return baseEmbed()
-                .setColor(ACCENT_COLOR);
+                .setColor(AccessibilityUtils.getAccessibleColor(ACCENT_COLOR))
+                .setThumbnail(ResourceManager.getAttachmentString(ResourceManager.WEAPON_STATS_ICON));
     }
     
     /**
-     * Create an economy embed
+     * Create an economy embed with Phase 3 structure enhancements
      */
     public static EmbedBuilder economyEmbed() {
+        Color goldColor = new Color(241, 196, 15); // Gold color for economy
         return baseEmbed()
-                .setColor(new Color(241, 196, 15)); // Gold color for economy
+                .setColor(AccessibilityUtils.getAccessibleColor(goldColor))
+                .setThumbnail(ResourceManager.getAttachmentString(ResourceManager.TRADER_ICON));
     }
     
     /**
-     * Create a premium embed
+     * Create a premium embed with Phase 3 structure enhancements
      */
     public static EmbedBuilder premiumEmbed() {
+        Color purpleColor = new Color(156, 89, 182); // Purple color for premium
         return baseEmbed()
-                .setColor(new Color(156, 89, 182)); // Purple color for premium
+                .setColor(AccessibilityUtils.getAccessibleColor(purpleColor))
+                .setThumbnail(ResourceManager.getAttachmentString(ResourceManager.MAIN_LOGO));
     }
     
     /**
-     * Create a server embed
+     * Create a server embed with Phase 3 structure enhancements
      */
     public static EmbedBuilder serverEmbed() {
+        Color blueColor = new Color(52, 152, 219); // Blue color for server info
         return baseEmbed()
-                .setColor(new Color(52, 152, 219)); // Blue color for server info
+                .setColor(AccessibilityUtils.getAccessibleColor(blueColor))
+                .setThumbnail(ResourceManager.getAttachmentString(ResourceManager.CONNECTIONS_ICON));
+    }
+    
+    /**
+     * Create an airdrop embed with Phase 3 structure enhancements
+     */
+    public static EmbedBuilder airdropEmbed() {
+        return baseEmbed()
+                .setColor(AccessibilityUtils.getAccessibleColor(EVENT_COLOR))
+                .setThumbnail(ResourceManager.getAttachmentString(ResourceManager.AIRDROP_ICON))
+                .setTitle(DynamicTitles.getAirdropTitle());
+    }
+    
+    /**
+     * Create a mission embed with Phase 3 structure enhancements
+     */
+    public static EmbedBuilder missionEmbed() {
+        return baseEmbed()
+                .setColor(AccessibilityUtils.getAccessibleColor(EVENT_COLOR))
+                .setThumbnail(ResourceManager.getAttachmentString(ResourceManager.MISSION_ICON))
+                .setTitle(DynamicTitles.getMissionTitle());
+    }
+    
+    /**
+     * Create a helicrash embed with Phase 3 structure enhancements
+     */
+    public static EmbedBuilder helicrashEmbed() {
+        return baseEmbed()
+                .setColor(AccessibilityUtils.getAccessibleColor(ERROR_COLOR))
+                .setThumbnail(ResourceManager.getAttachmentString(ResourceManager.HELICRASH_ICON))
+                .setTitle(DynamicTitles.getHelicrashTitle());
     }
 }
