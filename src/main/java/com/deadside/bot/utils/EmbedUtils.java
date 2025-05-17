@@ -182,72 +182,30 @@ public class EmbedUtils {
     }
     
     /**
-     * Create a modern styled killfeed embed with dynamic titles
+     * Create a modern styled killfeed embed with dynamic titles - PHASE 6 enhancement
+     * Consider using AdvancedEmbeds.advancedKillfeedEmbed for more premium visuals
      */
     public static MessageEmbed killfeedEmbed(String killer, String victim, String weapon, int distance) {
-        String title = getRandomKillfeedTitle();
-        String description = getRandomKillfeedDescription(killer, victim, weapon, distance);
-        
-        return new EmbedBuilder()
-                .setTitle(title)
-                .setDescription(description)
-                .setColor(EMERALD_GREEN)
-                .setThumbnail(KILLFEED_ICON)
-                .addField("Killer", killer, true)
-                .addField("Victim", victim, true)
-                .addField("Weapon", weapon, true)
-                .addField("Distance", distance + "m", true)
-                .setFooter(STANDARD_FOOTER)
-                .setTimestamp(Instant.now())
-                .build();
+        // Use the AdvancedEmbeds implementation for premium visuals
+        return AdvancedEmbeds.advancedKillfeedEmbed(killer, victim, weapon, distance, false, 0);
     }
     
     /**
-     * Create a modern styled bounty killfeed embed
+     * Create a modern styled bounty killfeed embed - PHASE 6 enhancement 
+     * Consider using AdvancedEmbeds.advancedKillfeedEmbed with isBounty=true for more premium visuals
      */
     public static MessageEmbed bountyKillfeedEmbed(String killer, String victim, String weapon, int distance, int bountyAmount) {
-        String title = getRandomBountyTitle();
-        
-        return new EmbedBuilder()
-                .setTitle(title)
-                .setDescription(killer + " collected the bounty on " + victim + "'s head")
-                .setColor(new Color(212, 175, 55)) // Gold color for bounties
-                .setThumbnail(BOUNTY_ICON)
-                .addField("Hunter", killer, true)
-                .addField("Target", victim, true)
-                .addField("Weapon", weapon, true)
-                .addField("Distance", distance + "m", true)
-                .addField("Bounty Collected", bountyAmount + " credits", false)
-                .setFooter(STANDARD_FOOTER)
-                .setTimestamp(Instant.now())
-                .build();
+        // Use the AdvancedEmbeds implementation for premium visuals
+        return AdvancedEmbeds.advancedKillfeedEmbed(killer, victim, weapon, distance, true, 0);
     }
     
     /**
-     * Create a modern styled suicide embed
+     * Create a modern styled suicide embed - PHASE 5 normalization
+     * Consider using AdvancedEmbeds.advancedSuicideEmbed for more premium visuals
      */
     public static MessageEmbed suicideEmbed(String player, String cause) {
-        String title = getRandomSuicideTitle();
-        String description;
-        
-        // Normalize suicide by relocation
-        if (cause.equals("suicide_by_relocation")) {
-            cause = "Menu Suicide";
-            description = player + " returned to the void (Menu Suicide)";
-        } else {
-            description = player + " ended their own journey (" + cause.replace("_", " ") + ")";
-        }
-        
-        return new EmbedBuilder()
-                .setTitle(title)
-                .setDescription(description)
-                .setColor(DARK_GRAY)
-                .setThumbnail(HELICRASH_ICON) // Added thumbnail for visual consistency
-                .addField("Player", player, true)
-                .addField("Cause", cause.replace("_", " "), true)
-                .setFooter(STANDARD_FOOTER)
-                .setTimestamp(Instant.now())
-                .build();
+        // Use the AdvancedEmbeds implementation for premium visuals
+        return AdvancedEmbeds.advancedSuicideEmbed(player, cause);
     }
     
     /**
@@ -398,9 +356,27 @@ public class EmbedUtils {
      */
     public static MessageEmbed connectionLogEmbed(String player, boolean isJoining) {
         String title = isJoining ? "Player Connected" : "Player Disconnected";
+        
+        // Get dynamic description from dynamic thematic messaging system
+        List<String> joinDescriptions = Arrays.asList(
+            player + " entered the zone",
+            player + " has joined the wasteland",
+            "A new survivor arrives: " + player,
+            player + " has appeared in Deadside",
+            "The zone has a new challenger: " + player
+        );
+        
+        List<String> leaveDescriptions = Arrays.asList(
+            player + " left the zone",
+            player + " has departed from the wasteland",
+            player + " vanished into the fog",
+            player + " has abandoned their post",
+            "One less survivor: " + player + " is gone"
+        );
+        
         String description = isJoining ? 
-                player + " entered the zone" : 
-                player + " left the zone";
+                joinDescriptions.get(random.nextInt(joinDescriptions.size())) : 
+                leaveDescriptions.get(random.nextInt(leaveDescriptions.size()));
         
         return new EmbedBuilder()
                 .setTitle(title)
