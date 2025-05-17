@@ -47,12 +47,36 @@ public class ResourceManager {
         if (fileUploadCache.containsKey(imageName)) {
             FileUpload cached = fileUploadCache.get(imageName);
             if (cached != null) {
-                // Create a new FileUpload from the same file
+                // We can't reuse FileUpload objects, so create a new one
+                // from the same location as the cached one
                 try {
-                    File cachedFile = cached.getData();
-                    return FileUpload.fromData(cachedFile, imageName);
+                    // Try to look up the original file again
+                    String classPath = CLASS_RESOURCES_PATH + IMAGES_FOLDER + imageName;
+                    File file = new File(classPath);
+                    
+                    if (file.exists()) {
+                        return FileUpload.fromData(file, imageName);
+                    }
+                    
+                    // Try main resources folder next
+                    String mainPath = MAIN_RESOURCES_PATH + IMAGES_FOLDER + imageName;
+                    file = new File(mainPath);
+                    
+                    if (file.exists()) {
+                        return FileUpload.fromData(file, imageName);
+                    }
+                    
+                    // Try attached_assets folder as fallback
+                    String attachedPath = "attached_assets/" + imageName;
+                    file = new File(attachedPath);
+                    
+                    if (file.exists()) {
+                        return FileUpload.fromData(file, imageName);
+                    }
+                    
+                    // If all else fails, return null and let the caller handle it
+                    return null;
                 } catch (Exception e) {
-                    // If there's an error, try to create a new one
                     return null;
                 }
             }
@@ -91,13 +115,14 @@ public class ResourceManager {
             }
             
             // Try classpath resource loading as last resort
-            InputStream inputStream = ResourceManager.class.getClassLoader().getResourceAsStream("images/" + imageName);
-            if (inputStream != null) {
-                Path tempFile = Files.createTempFile("resource-", imageName);
-                Files.copy(inputStream, tempFile, java.nio.file.StandardCopyOption.REPLACE_EXISTING);
-                FileUpload fileUpload = FileUpload.fromData(tempFile.toFile(), imageName);
-                fileUploadCache.put(imageName, fileUpload);
-                return fileUpload;
+            try (InputStream inputStream = ResourceManager.class.getClassLoader().getResourceAsStream("images/" + imageName)) {
+                if (inputStream != null) {
+                    Path tempFile = Files.createTempFile("resource-", imageName);
+                    Files.copy(inputStream, tempFile, java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+                    FileUpload fileUpload = FileUpload.fromData(tempFile.toFile(), imageName);
+                    fileUploadCache.put(imageName, fileUpload);
+                    return fileUpload;
+                }
             }
             
             // If we get here, the resource was not found

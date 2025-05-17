@@ -21,10 +21,10 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "./start_bot.sh"
+args = "mvn clean package && java -jar target/deadside-discord-bot-1.0-SNAPSHOT.jar"
 
 [deployment]
-run = ["sh", "-c", "./start_bot.sh"]
+run = ["sh", "-c", "mvn clean package && java -jar target/deadside-discord-bot-1.0-SNAPSHOT.jar"]
 
 [[ports]]
 localPort = 8080
