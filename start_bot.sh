@@ -1,16 +1,11 @@
 #!/bin/bash
 
-echo "Starting Deadside Discord Bot with Maven..."
+# Ensure Java and Maven are installed
+echo "Checking Java version..."
+java -version
 
-# Check if Discord token is set
-if [ -z "$DISCORD_TOKEN" ]; then
-  echo "ERROR: DISCORD_TOKEN environment variable is not set!"
-  echo "Please set it in the Secrets tab (lock icon) in Replit."
-  exit 1
-fi
+echo "Building project with Maven..."
+mvn clean package
 
-# Run the bot with Maven
-mvn exec:java -Dexec.mainClass="com.deadside.bot.Main" || {
-  echo "Failed to start the bot with main class. Exiting."
-  exit 1
-}
+echo "Starting Deadside Discord Bot..."
+java -jar target/deadside-discord-bot-1.0-SNAPSHOT.jar

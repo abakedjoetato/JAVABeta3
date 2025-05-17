@@ -85,7 +85,14 @@ public class Config {
     }
 
     public String getDiscordToken() {
-        String token = getProperty(DISCORD_TOKEN, "");
+        // First try directly with BOT_TOKEN environment variable
+        String token = System.getenv("BOT_TOKEN");
+        
+        // If not found, fallback to the regular property lookup
+        if (token == null || token.isEmpty()) {
+            token = getProperty(DISCORD_TOKEN, "");
+        }
+        
         if (token.isEmpty()) {
             logger.error("Discord token not found in configuration");
             throw new IllegalStateException("Discord token must be provided");
@@ -94,9 +101,15 @@ public class Config {
     }
 
     public String getMongoUri() {
-        // Get MongoDB URI from environment or config
-        // Default to Atlas format with placeholder values that must be replaced with actual credentials
-        return getProperty(MONGO_URI, "mongodb+srv://username:password@cluster.mongodb.net/deadside_bot?retryWrites=true&w=majority");
+        // First try directly with MONGO_URI environment variable
+        String uri = System.getenv("MONGO_URI");
+        
+        // If not found, fallback to the regular property lookup
+        if (uri == null || uri.isEmpty()) {
+            uri = getProperty(MONGO_URI, "mongodb+srv://username:password@cluster.mongodb.net/deadside_bot?retryWrites=true&w=majority");
+        }
+        
+        return uri;
     }
 
     public String getMongoDatabase() {
