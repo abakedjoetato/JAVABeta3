@@ -25,10 +25,14 @@
 /home/runner/workspace/src/main/java/com/deadside/bot/commands/economy/AdminEconomyCommand.java
 /home/runner/workspace/src/main/java/com/deadside/bot/db/models/Player.java
 /home/runner/workspace/src/main/java/com/deadside/bot/commands/ICommand.java
+/home/runner/workspace/src/main/java/com/deadside/bot/utils/EmbedValidator.java
 /home/runner/workspace/src/main/java/com/deadside/bot/utils/EmbedThemes.java
 /home/runner/workspace/src/main/java/com/deadside/bot/commands/faction/FactionMembersCommand.java
 /home/runner/workspace/src/main/java/com/deadside/bot/db/repositories/PlayerRepository.java
+/home/runner/workspace/src/main/java/com/deadside/bot/utils/EmbedSender.java
+/home/runner/workspace/src/main/java/com/deadside/bot/utils/DynamicTitles.java
 /home/runner/workspace/src/main/java/com/deadside/bot/db/repositories/GameServerRepository.java
+/home/runner/workspace/src/main/java/com/deadside/bot/utils/ResourceManager.java
 /home/runner/workspace/src/main/java/com/deadside/bot/commands/faction/FactionCommand.java
 /home/runner/workspace/src/main/java/com/deadside/bot/commands/economy/SlotCommand.java
 /home/runner/workspace/src/main/java/com/deadside/bot/parsers/KillfeedParser.java
@@ -46,6 +50,7 @@
 /home/runner/workspace/src/main/java/com/deadside/bot/premium/Tip4servWebhookController.java
 /home/runner/workspace/src/main/java/com/deadside/bot/sftp/SftpManager.java
 /home/runner/workspace/src/main/java/com/deadside/bot/utils/HistoricalDataProcessor.java
+/home/runner/workspace/src/main/java/com/deadside/bot/utils/AccessibilityUtils.java
 /home/runner/workspace/src/main/java/com/deadside/bot/parsers/DeadsideCsvParser.java
 /home/runner/workspace/src/main/java/com/deadside/bot/ui/SelectMenuBuilder.java
 /home/runner/workspace/src/main/java/com/deadside/bot/schedulers/PlayerCountVoiceChannelUpdater.java
@@ -57,6 +62,7 @@
 /home/runner/workspace/src/main/java/com/deadside/bot/premium/FeatureGate.java
 /home/runner/workspace/src/main/java/com/deadside/bot/utils/LogParserTester.java
 /home/runner/workspace/src/main/java/com/deadside/bot/utils/HttpUtils.java
+/home/runner/workspace/src/main/java/com/deadside/bot/utils/AdvancedEmbeds.java
 /home/runner/workspace/src/main/java/com/deadside/bot/db/models/Currency.java
 /home/runner/workspace/src/main/java/com/deadside/bot/commands/stats/LeaderboardCommand.java
 /home/runner/workspace/src/main/java/com/deadside/bot/commands/economy/BlackjackCommand.java

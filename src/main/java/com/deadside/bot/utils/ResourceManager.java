@@ -47,7 +47,14 @@ public class ResourceManager {
         if (fileUploadCache.containsKey(imageName)) {
             FileUpload cached = fileUploadCache.get(imageName);
             if (cached != null) {
-                return cached.reset(); // Reset the file upload to allow reuse
+                // Create a new FileUpload from the same file
+                try {
+                    File cachedFile = cached.getData();
+                    return FileUpload.fromData(cachedFile, imageName);
+                } catch (Exception e) {
+                    // If there's an error, try to create a new one
+                    return null;
+                }
             }
         }
         
