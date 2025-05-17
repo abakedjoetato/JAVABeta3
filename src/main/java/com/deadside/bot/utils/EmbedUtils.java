@@ -27,8 +27,8 @@ public class EmbedUtils {
     private static final Color INFO_COLOR = STEEL_BLUE;                     // Info steel blue
     private static final Color WARNING_COLOR = new Color(209, 139, 71);     // Desaturated warning orange
     
-    // Standard images/logos
-    private static final String MAIN_LOGO = "https://i.imgur.com/Mainlogo.png";
+    // Standard images/logos - Updated to use transparent PNGs as thumbnails
+    public static final String MAIN_LOGO = "attachment://Mainlogo.png";
     public static final String KILLFEED_ICON = "attachment://Killfeed.png";
     public static final String BOUNTY_ICON = "attachment://Bounty.png";
     public static final String MISSION_ICON = "attachment://Mission.png";

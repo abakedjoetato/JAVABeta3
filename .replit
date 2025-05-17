@@ -25,3 +25,7 @@ args = "./start_bot.sh"
 
 [deployment]
 run = ["sh", "-c", "./start_bot.sh"]
+
+[[ports]]
+localPort = 8080
+externalPort = 80

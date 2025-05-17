@@ -28,12 +28,12 @@ public class EmbedThemes {
     public static final Color ERROR_COLOR = new Color(192, 57, 43);        // Red for errors
     public static final Color INFO_COLOR = new Color(52, 152, 219);        // Blue for info
     
-    // Deadside logo URL and icon URLs
-    private static final String DEADSIDE_LOGO = "https://cdn.akamai.steamstatic.com/steam/apps/895400/header.jpg";
-    private static final String SUCCESS_ICON = "https://cdn-icons-png.flaticon.com/512/5290/5290058.png";
-    private static final String WARNING_ICON = "https://cdn-icons-png.flaticon.com/512/4201/4201973.png";
-    private static final String ERROR_ICON = "https://cdn-icons-png.flaticon.com/512/1828/1828843.png";
-    private static final String INFO_ICON = "https://cdn-icons-png.flaticon.com/512/471/471664.png";
+    // Deadside logo and icon URLs - Using transparent PNG attachments
+    private static final String DEADSIDE_LOGO = "attachment://Mainlogo.png";
+    private static final String SUCCESS_ICON = "attachment://Mission.png";      // Repurposing existing transparent images
+    private static final String WARNING_ICON = "attachment://Bounty.png";
+    private static final String ERROR_ICON = "attachment://Helicrash.png";
+    private static final String INFO_ICON = "attachment://Connections.png";
     
     /**
      * Create a base themed embed with Deadside style
@@ -42,7 +42,7 @@ public class EmbedThemes {
         return new EmbedBuilder()
                 .setColor(PRIMARY_COLOR)
                 .setTimestamp(Instant.now())
-                .setFooter("Deadside Bot", DEADSIDE_LOGO);
+                .setFooter("Powered By Discord.gg/EmeraldServers");
     }
     
     /**
@@ -51,8 +51,9 @@ public class EmbedThemes {
     public static MessageEmbed eventEmbed(String title, String description) {
         return baseEmbed()
                 .setColor(EVENT_COLOR)
-                .setTitle("🎮 " + title)
+                .setTitle(title)
                 .setDescription(description)
+                .setThumbnail(SUCCESS_ICON)
                 .build();
     }
     
@@ -62,10 +63,10 @@ public class EmbedThemes {
     public static MessageEmbed killEmbed(String killer, String victim, String weapon, int distance) {
         return baseEmbed()
                 .setColor(KILL_COLOR)
-                .setTitle("☠️ Kill Feed")
+                .setTitle("Kill Feed")
                 .setDescription(String.format("**%s** killed **%s**\nWeapon: **%s**\nDistance: **%dm**", 
                         killer, victim, weapon, distance))
-                .setThumbnail("https://cdn-icons-png.flaticon.com/512/4233/4233830.png")
+                .setThumbnail("attachment://Killfeed.png")
                 .build();
     }
     
@@ -75,9 +76,9 @@ public class EmbedThemes {
     public static MessageEmbed deathEmbed(String victim, String cause) {
         return baseEmbed()
                 .setColor(DEATH_COLOR)
-                .setTitle("💀 Death Feed")
+                .setTitle("Death Feed")
                 .setDescription(String.format("**%s** died from **%s**", victim, cause))
-                .setThumbnail("https://cdn-icons-png.flaticon.com/512/5509/5509405.png")
+                .setThumbnail("attachment://Helicrash.png")
                 .build();
     }
     
@@ -87,9 +88,9 @@ public class EmbedThemes {
     public static MessageEmbed joinEmbed(String playerName) {
         return baseEmbed()
                 .setColor(JOIN_COLOR)
-                .setTitle("🚶 Player Joined")
+                .setTitle("Player Joined")
                 .setDescription(String.format("**%s** joined the server", playerName))
-                .setThumbnail("https://cdn-icons-png.flaticon.com/512/1828/1828471.png")
+                .setThumbnail("attachment://Connections.png")
                 .build();
     }
     
@@ -99,9 +100,9 @@ public class EmbedThemes {
     public static MessageEmbed leaveEmbed(String playerName) {
         return baseEmbed()
                 .setColor(LEAVE_COLOR)
-                .setTitle("🚶‍♂️ Player Left")
+                .setTitle("Player Left")
                 .setDescription(String.format("**%s** left the server", playerName))
-                .setThumbnail("https://cdn-icons-png.flaticon.com/512/1828/1828470.png")
+                .setThumbnail("attachment://Connections.png")
                 .build();
     }
     
@@ -111,7 +112,7 @@ public class EmbedThemes {
     public static MessageEmbed successEmbed(String title, String description) {
         return baseEmbed()
                 .setColor(SUCCESS_COLOR)
-                .setTitle("✅ " + title)
+                .setTitle(title)
                 .setDescription(description)
                 .setThumbnail(SUCCESS_ICON)
                 .build();
@@ -123,7 +124,7 @@ public class EmbedThemes {
     public static MessageEmbed warningEmbed(String title, String description) {
         return baseEmbed()
                 .setColor(WARNING_COLOR)
-                .setTitle("⚠️ " + title)
+                .setTitle(title)
                 .setDescription(description)
                 .setThumbnail(WARNING_ICON)
                 .build();
@@ -135,7 +136,7 @@ public class EmbedThemes {
     public static MessageEmbed errorEmbed(String title, String description) {
         return baseEmbed()
                 .setColor(ERROR_COLOR)
-                .setTitle("❌ " + title)
+                .setTitle(title)
                 .setDescription(description)
                 .setThumbnail(ERROR_ICON)
                 .build();
@@ -147,7 +148,7 @@ public class EmbedThemes {
     public static MessageEmbed infoEmbed(String title, String description) {
         return baseEmbed()
                 .setColor(INFO_COLOR)
-                .setTitle("ℹ️ " + title)
+                .setTitle(title)
                 .setDescription(description)
                 .setThumbnail(INFO_ICON)
                 .build();
