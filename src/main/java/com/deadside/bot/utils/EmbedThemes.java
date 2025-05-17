@@ -2,9 +2,12 @@ package com.deadside.bot.utils;
 
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
+import net.dv8tion.jda.api.utils.FileUpload;
 
 import java.awt.Color;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Utility class for creating themed embeds for the Deadside bot
@@ -28,12 +31,12 @@ public class EmbedThemes {
     public static final Color ERROR_COLOR = new Color(192, 57, 43);        // Red for errors
     public static final Color INFO_COLOR = new Color(52, 152, 219);        // Blue for info
     
-    // Deadside logo and icon URLs - Using transparent PNG attachments
-    private static final String DEADSIDE_LOGO = "attachment://Mainlogo.png";
-    private static final String SUCCESS_ICON = "attachment://Mission.png";      // Repurposing existing transparent images
-    private static final String WARNING_ICON = "attachment://Bounty.png";
-    private static final String ERROR_ICON = "attachment://Helicrash.png";
-    private static final String INFO_ICON = "attachment://Connections.png";
+    // Deadside logo and icon URLs - Using ResourceManager for transparent PNG attachments
+    private static final String DEADSIDE_LOGO = ResourceManager.getAttachmentString(ResourceManager.MAIN_LOGO);
+    private static final String SUCCESS_ICON = ResourceManager.getAttachmentString(ResourceManager.MISSION_ICON);
+    private static final String WARNING_ICON = ResourceManager.getAttachmentString(ResourceManager.BOUNTY_ICON);
+    private static final String ERROR_ICON = ResourceManager.getAttachmentString(ResourceManager.HELICRASH_ICON);
+    private static final String INFO_ICON = ResourceManager.getAttachmentString(ResourceManager.CONNECTIONS_ICON);
     
     /**
      * Create a base themed embed with Deadside style
@@ -66,7 +69,7 @@ public class EmbedThemes {
                 .setTitle("Kill Feed")
                 .setDescription(String.format("**%s** killed **%s**\nWeapon: **%s**\nDistance: **%dm**", 
                         killer, victim, weapon, distance))
-                .setThumbnail("attachment://Killfeed.png")
+                .setThumbnail(ResourceManager.getAttachmentString(ResourceManager.KILLFEED_ICON))
                 .build();
     }
     

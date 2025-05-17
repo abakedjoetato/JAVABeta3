@@ -2,12 +2,14 @@ package com.deadside.bot.utils;
 
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
+import net.dv8tion.jda.api.utils.FileUpload;
 
 import java.awt.Color;
 import java.time.Instant;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+import java.util.ArrayList;
 
 /**
  * Utility class for creating modern Discord message embeds
@@ -27,17 +29,17 @@ public class EmbedUtils {
     private static final Color INFO_COLOR = STEEL_BLUE;                     // Info steel blue
     private static final Color WARNING_COLOR = new Color(209, 139, 71);     // Desaturated warning orange
     
-    // Standard images/logos - Updated to use transparent PNGs as thumbnails
-    public static final String MAIN_LOGO = "attachment://Mainlogo.png";
-    public static final String KILLFEED_ICON = "attachment://Killfeed.png";
-    public static final String BOUNTY_ICON = "attachment://Bounty.png";
-    public static final String MISSION_ICON = "attachment://Mission.png";
-    public static final String FACTION_ICON = "attachment://Faction.png";
-    public static final String AIRDROP_ICON = "attachment://Airdrop.png";
-    public static final String TRADER_ICON = "attachment://Trader.png";
-    public static final String CONNECTIONS_ICON = "attachment://Connections.png";
-    public static final String WEAPON_STATS_ICON = "attachment://WeaponStats.png";
-    public static final String HELICRASH_ICON = "attachment://Helicrash.png";
+    // Standard images/logos - Using ResourceManager for transparent PNG thumbnails
+    public static final String MAIN_LOGO = ResourceManager.getAttachmentString(ResourceManager.MAIN_LOGO);
+    public static final String KILLFEED_ICON = ResourceManager.getAttachmentString(ResourceManager.KILLFEED_ICON);
+    public static final String BOUNTY_ICON = ResourceManager.getAttachmentString(ResourceManager.BOUNTY_ICON);
+    public static final String MISSION_ICON = ResourceManager.getAttachmentString(ResourceManager.MISSION_ICON);
+    public static final String FACTION_ICON = ResourceManager.getAttachmentString(ResourceManager.FACTION_ICON);
+    public static final String AIRDROP_ICON = ResourceManager.getAttachmentString(ResourceManager.AIRDROP_ICON);
+    public static final String TRADER_ICON = ResourceManager.getAttachmentString(ResourceManager.TRADER_ICON);
+    public static final String CONNECTIONS_ICON = ResourceManager.getAttachmentString(ResourceManager.CONNECTIONS_ICON);
+    public static final String WEAPON_STATS_ICON = ResourceManager.getAttachmentString(ResourceManager.WEAPON_STATS_ICON);
+    public static final String HELICRASH_ICON = ResourceManager.getAttachmentString(ResourceManager.HELICRASH_ICON);
     
     // Standard footer text
     public static final String STANDARD_FOOTER = "Powered By Discord.gg/EmeraldServers";
@@ -287,11 +289,36 @@ public class EmbedUtils {
                 .setTitle(title)
                 .setDescription(description)
                 .setColor(DARK_GRAY)
+                .setThumbnail(HELICRASH_ICON) // Added thumbnail for visual consistency
                 .addField("Player", player, true)
                 .addField("Cause", cause.replace("_", " "), true)
                 .setFooter(STANDARD_FOOTER)
                 .setTimestamp(Instant.now())
                 .build();
+    }
+    
+    /**
+     * Get the file uploads needed for an embed with thumbnails
+     * @param thumbnailNames Names of thumbnail images used in the embed
+     * @return Array of FileUpload objects needed for the embed
+     */
+    public static FileUpload[] getFileUploadsForEmbed(String... thumbnailNames) {
+        List<FileUpload> uploads = new ArrayList<>();
+        
+        for (String name : thumbnailNames) {
+            // Extract filename from attachment:// format
+            String fileName = name;
+            if (name.startsWith("attachment://")) {
+                fileName = name.substring("attachment://".length());
+            }
+            
+            FileUpload upload = ResourceManager.getImageAsFileUpload(fileName);
+            if (upload != null) {
+                uploads.add(upload);
+            }
+        }
+        
+        return uploads.toArray(new FileUpload[0]);
     }
     
     /**
@@ -304,6 +331,7 @@ public class EmbedUtils {
                 .setTitle(title)
                 .setDescription(player + " fell from a great height")
                 .setColor(DARK_GRAY)
+                .setThumbnail(HELICRASH_ICON) // Added thumbnail for visual consistency
                 .addField("Player", player, true)
                 .addField("Cause", "Falling damage", true)
                 .addField("Height", height + "m", true)
